@@ -1,60 +1,1322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="animations.js" defer></script>
+  <meta name="google-site-verification" content="zrRdwIqL1C5_thw4D-P6qGjQbd5JeDxqaIfx5c6Cw6U" />
+  <title>Muhammad Iftikhar | ZyrogX - AI Engineer</title>
+  <meta name="description" content="Portfolio of Muhammad Iftikhar (ZyrogX), an aspiring AI Engineer. Explore my Machine Learning, Deep Learning, and AI projects.">
+  <meta name="keywords" content="Muhammad Iftikhar, ZyrogX, AI Engineer, Machine Learning, Deep Learning, Portfolio, AI Developer">
+  <meta name="author" content="Muhammad Iftikhar">
+  <meta property="og:title" content="Muhammad Iftikhar | ZyrogX - AI Engineer">
+  <meta property="og:description" content="Visit my portfolio showcasing AI, ML, and DL projects. Connect with me for collaborations!">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --desktop-bg: #0d1117;
+      --taskbar-bg: rgba(13, 17, 23, 0.92);
+      --window-bg: #161b22;
+      --window-header: #21262d;
+      --border: rgba(48, 54, 61, 0.8);
+      --accent: #58a6ff;
+      --accent2: #bc8cff;
+      --accent3: #3fb950;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --close: #ff5f57;
+      --minimize: #febc2e;
+      --maximize: #28c840;
+      --glass: rgba(22, 27, 34, 0.85);
+      --shadow: 0 25px 60px rgba(0,0,0,0.6);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--desktop-bg);
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      cursor: default;
+    }
+
+    /* ── DESKTOP ── */
+    #desktop {
+      width: 100vw;
+      height: calc(100vh - 48px);
+      position: relative;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(88,166,255,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(188,140,255,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(63,185,80,0.04) 0%, transparent 50%),
+        #0d1117;
+      overflow: hidden;
+    }
+
+    /* Subtle grid pattern */
+    #desktop::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(88,166,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88,166,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* ── TASKBAR ── */
+    #taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: var(--taskbar-bg);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      z-index: 9999;
+    }
+
+    #taskbar-left {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+    }
+
+    #taskbar-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #taskbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+    }
+
+    .start-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 8px;
+      padding: 6px 14px;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+    .start-btn:hover { opacity: 0.85; }
+
+    .taskbar-app {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .taskbar-app:hover, .taskbar-app.active { background: rgba(88,166,255,0.12); color: var(--text); }
+    .taskbar-app.active { border-bottom: 2px solid var(--accent); }
+    .taskbar-app i { font-size: 13px; color: var(--accent); }
+
+    #clock {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* ── DESKTOP ICONS ── */
+    .desktop-icons {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .desktop-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 72px;
+      cursor: pointer;
+      padding: 8px 4px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .desktop-icon:hover { background: rgba(88,166,255,0.12); }
+    .desktop-icon.selected { background: rgba(88,166,255,0.2); }
+
+    .icon-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fff;
+    }
+    .icon-label {
+      font-size: 10px;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.3;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* ── WINDOWS ── */
+    .window {
+      position: absolute;
+      background: var(--window-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-width: 320px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s;
+    }
+    .window.hidden { display: none; }
+    .window.focused { box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(88,166,255,0.3); z-index: 100; }
+
+    .window-titlebar {
+      background: var(--window-header);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      cursor: grab;
+      flex-shrink: 0;
+    }
+    .window-titlebar:active { cursor: grabbing; }
+
+    .window-controls {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .wc-btn {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.15s;
+      flex-shrink: 0;
+    }
+    .wc-btn:hover { filter: brightness(1.3); }
+    .wc-close { background: var(--close); }
+    .wc-min { background: var(--minimize); }
+    .wc-max { background: var(--maximize); }
+
+    .window-title {
+      font-size: 12px;
+      color: var(--text-muted);
+      flex: 1;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.5px;
+    }
+    .window-title-icon { margin-right: 6px; }
+
+    .window-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .window-body::-webkit-scrollbar { width: 6px; }
+    .window-body::-webkit-scrollbar-track { background: transparent; }
+    .window-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── RESIZE HANDLE ── */
+    .resize-handle {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 18px;
+      height: 18px;
+      cursor: se-resize;
+      opacity: 0.4;
+    }
+    .resize-handle::after {
+      content: '';
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--text-muted);
+      border-bottom: 2px solid var(--text-muted);
+    }
+
+    /* ── WINDOW CONTENT STYLES ── */
+    .win-content {
+      padding: 24px;
+      color: var(--text);
+      user-select: text;
+    }
+
+    .win-section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    /* ABOUT */
+    .about-hero {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .avatar-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+    .about-text h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .about-text .role {
+      font-size: 12px;
+      color: var(--accent);
+      margin: 4px 0 8px;
+    }
+    .about-text p { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .info-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .info-item .label { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
+    .info-item .value { font-size: 12px; color: var(--text); }
+
+    /* SKILLS */
+    .skill-category { margin-bottom: 18px; }
+    .skill-cat-title {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-cat-title i { color: var(--accent); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      border: 1px solid;
+      transition: transform 0.15s;
+      cursor: default;
+    }
+    .skill-tag:hover { transform: scale(1.05); }
+    .tag-blue { border-color: rgba(88,166,255,0.4); color: #58a6ff; background: rgba(88,166,255,0.08); }
+    .tag-purple { border-color: rgba(188,140,255,0.4); color: #bc8cff; background: rgba(188,140,255,0.08); }
+    .tag-green { border-color: rgba(63,185,80,0.4); color: #3fb950; background: rgba(63,185,80,0.08); }
+    .tag-yellow { border-color: rgba(255,196,0,0.4); color: #ffc400; background: rgba(255,196,0,0.08); }
+    .tag-pink { border-color: rgba(255,128,180,0.4); color: #ff80b4; background: rgba(255,128,180,0.08); }
+
+    /* PROJECTS */
+    .project-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .project-item:hover { border-color: rgba(88,166,255,0.4); background: rgba(88,166,255,0.04); }
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .project-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .project-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); }
+    .project-desc { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-bottom: 8px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .project-tag {
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      background: rgba(88,166,255,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(88,166,255,0.2);
+    }
+    .project-link { font-size: 11px; color: var(--accent); text-decoration: none; float: right; margin-top: -20px; }
+    .project-link:hover { text-decoration: underline; }
+
+    /* CONTACT */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+    .contact-item:hover { border-color: rgba(88,166,255,0.4); }
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .contact-label { font-size: 10px; color: var(--text-muted); }
+    .contact-value { font-size: 12px; color: var(--text); }
+    .contact-value a { color: var(--accent); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+
+    .contact-form { margin-top: 20px; }
+    .form-row { margin-bottom: 12px; }
+    .form-label { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 5px; letter-spacing: 0.5px; }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--accent); }
+    textarea.form-input { resize: vertical; min-height: 80px; }
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.85; }
+
+    /* TERMINAL */
+    .terminal-body {
+      background: #0d1117;
+      padding: 16px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #3fb950;
+      min-height: 200px;
+      user-select: text;
+    }
+    .terminal-line { display: flex; gap: 8px; }
+    .terminal-prompt { color: var(--accent2); flex-shrink: 0; }
+    .terminal-cmd { color: var(--text); }
+    .terminal-out { color: var(--text-muted); padding-left: 16px; }
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: #3fb950;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* CONTEXT MENU */
+    #context-menu {
+      position: fixed;
+      background: var(--window-header);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 99999;
+      min-width: 160px;
+      padding: 4px;
+      display: none;
+    }
+    .ctx-item {
+      padding: 7px 14px;
+      font-size: 12px;
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ctx-item:hover { background: rgba(88,166,255,0.15); }
+    .ctx-item i { color: var(--accent); width: 14px; }
+    .ctx-sep { height: 1px; background: var(--border); margin: 4px 0; }
+
+    /* BOOT SCREEN */
+    #boot {
+      position: fixed;
+      inset: 0;
+      background: #0d1117;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      transition: opacity 0.6s;
+    }
+    #boot .boot-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    #boot .boot-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      margin-bottom: 40px;
+    }
+    .boot-bar-wrap {
+      width: 200px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .boot-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      animation: bootprogress 1.8s ease forwards;
+    }
+    @keyframes bootprogress {
+      0% { width: 0; }
+      60% { width: 70%; }
+      100% { width: 100%; }
+    }
+
+    /* NOTIFICATION */
+    #notif {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: var(--window-header);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      z-index: 99998;
+      font-size: 12px;
+      color: var(--text);
+      max-width: 260px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transform: translateX(300px);
+      transition: transform 0.3s;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    #notif.show { transform: translateX(0); }
+    #notif .notif-icon { color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+    #notif .notif-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    #notif .notif-body { color: var(--text-muted); font-size: 11px; }
+
+    /* MOBILE NOTE */
+    #mobile-note {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #0d1117;
+      z-index: 999999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+    }
+    @media (max-width: 640px) { #mobile-note { display: flex; } }
+    #mobile-note .logo { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+    #mobile-note p { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 24px; }
+    #mobile-note a { color: var(--accent); font-size: 13px; text-decoration: none; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>My Creative Portfolio</h1>
-    </header>
-    <main>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Welcome to my portfolio! I am a creative professional with a passion for ...</p>
-        </section>
-        <section id="timeline">
-            <h2>Experience Timeline</h2>
-            <ul>
-                <li>2023: Started my journey as a ...</li>
-                <li>2025: Achieved ...</li>
-            </ul>
-        </section>
-        <section id="statistics">
-            <h2>Statistics</h2>
-            <ul>
-                <li>Projects Completed: 20+</li>
-                <li>Years of Experience: 5</li>
-            </ul>
-        </section>
-        <section id="achievements">
-            <h2>Achievements</h2>
-            <ul>
-                <li>Received ... award</li>
-                <li>Published in ...</li>
-            </ul>
-        </section>
-        <section id="projects">
-            <h2>Enhanced Projects</h2>
-            <div class="project-list">
-                <div class="project">
-                    <h3>Project Title</h3>
-                    <p>Project Description...</p>
-                </div>
-            </div>
-        </section>
-        <section id="testimonials">
-            <h2>Testimonials</h2>
-            <blockquote>
-                <p>"An outstanding professional!" - Client A</p>
-            </blockquote>
-        </section>
-    </main>
-    <footer>
-        <p>Contact: <a href="mailto:email@example.com">email@example.com</a></p>
-    </footer>
+
+<!-- Mobile fallback -->
+<div id="mobile-note">
+  <div class="logo">ZyrogX</div>
+  <p>This OS-style portfolio is designed for desktop. Please open it on a larger screen for the full experience.</p>
+  <a href="https://github.com/zyrogX" target="_blank"><i class="fab fa-github"></i> github.com/zyrogX</a>
+</div>
+
+<!-- Boot Screen -->
+<div id="boot">
+  <div class="boot-logo">ZyrogX OS</div>
+  <div class="boot-sub">INITIALIZING SYSTEM</div>
+  <div class="boot-bar-wrap"><div class="boot-bar"></div></div>
+</div>
+
+<!-- Notification -->
+<div id="notif">
+  <div class="notif-icon"><i class="fas fa-info-circle"></i></div>
+  <div>
+    <div class="notif-title">Welcome!</div>
+    <div class="notif-body">Double-click icons to open apps. Drag windows to move them.</div>
+  </div>
+</div>
+
+<!-- Context Menu -->
+<div id="context-menu">
+  <div class="ctx-item" onclick="openWindow('about')"><i class="fas fa-user"></i> About Me</div>
+  <div class="ctx-item" onclick="openWindow('skills')"><i class="fas fa-code"></i> Skills</div>
+  <div class="ctx-item" onclick="openWindow('projects')"><i class="fas fa-folder"></i> Projects</div>
+  <div class="ctx-item" onclick="openWindow('contact')"><i class="fas fa-envelope"></i> Contact</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" onclick="openWindow('terminal')"><i class="fas fa-terminal"></i> Terminal</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" onclick="cascadeWindows()"><i class="fas fa-th-large"></i> Arrange All</div>
+</div>
+
+<!-- Desktop -->
+<div id="desktop" oncontextmenu="showContextMenu(event)">
+
+  <!-- Desktop Icons -->
+  <div class="desktop-icons">
+    <div class="desktop-icon" ondblclick="openWindow('about')" onclick="selectIcon(this)">
+      <div class="icon-img" style="background: linear-gradient(135deg,#58a6ff,#bc8cff)"><i class="fas fa-user"></i></div>
+      <span class="icon-label">About Me</span>
+    </div>
+    <div class="desktop-icon" ondblclick="openWindow('skills')" onclick="selectIcon(this)">
+      <div class="icon-img" style="background: linear-gradient(135deg,#3fb950,#58a6ff)"><i class="fas fa-code"></i></div>
+      <span class="icon-label">Skills</span>
+    </div>
+    <div class="desktop-icon" ondblclick="openWindow('projects')" onclick="selectIcon(this)">
+      <div class="icon-img" style="background: linear-gradient(135deg,#ffc400,#ff7c00)"><i class="fas fa-folder-open"></i></div>
+      <span class="icon-label">Projects</span>
+    </div>
+    <div class="desktop-icon" ondblclick="openWindow('contact')" onclick="selectIcon(this)">
+      <div class="icon-img" style="background: linear-gradient(135deg,#ff80b4,#bc8cff)"><i class="fas fa-envelope"></i></div>
+      <span class="icon-label">Contact</span>
+    </div>
+    <div class="desktop-icon" ondblclick="openWindow('terminal')" onclick="selectIcon(this)">
+      <div class="icon-img" style="background: linear-gradient(135deg,#0d1117,#21262d); border: 1px solid #3fb950"><i class="fas fa-terminal" style="color:#3fb950"></i></div>
+      <span class="icon-label">Terminal</span>
+    </div>
+  </div>
+
+  <!-- ABOUT WINDOW -->
+  <div id="win-about" class="window hidden" style="width:480px;top:60px;left:120px;">
+    <div class="window-titlebar" data-win="about">
+      <div class="window-controls">
+        <button class="wc-btn wc-close" onclick="closeWindow('about')"></button>
+        <button class="wc-btn wc-min" onclick="minimizeWindow('about')"></button>
+        <button class="wc-btn wc-max" onclick="maximizeWindow('about')"></button>
+      </div>
+      <div class="window-title"><i class="fas fa-user window-title-icon"></i>About Me</div>
+      <div style="width:37px"></div>
+    </div>
+    <div class="window-body">
+      <div class="win-content">
+        <div class="about-hero">
+          <div class="avatar-box"><i class="fas fa-user-astronaut"></i></div>
+          <div class="about-text">
+            <h1>Muhammad Iftikhar</h1>
+            <div class="role">// AI Engineer · ZyrogX</div>
+            <p>Computer Science student specializing in Artificial Intelligence, graduating 2026. Passionate about deep learning, computer vision, and building real-world AI applications.</p>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);line-height:1.7;margin-bottom:12px">
+          I love building real-world AI projects and coding tools that solve practical problems. My passion lies particularly in deep learning and computer vision, where I enjoy exploring how machines can interpret and understand visual data.
+        </p>
+        <p style="font-size:12px;color:var(--text-muted);line-height:1.7;margin-bottom:16px">
+          When I'm not coding, you can find me reading about the latest advancements in AI, contributing to open-source projects, or mentoring fellow students in their tech journey.
+        </p>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">// STATUS</div>
+            <div class="value" style="color:#3fb950">● Available</div>
+          </div>
+          <div class="info-item">
+            <div class="label">// GRADUATION</div>
+            <div class="value">2026</div>
+          </div>
+          <div class="info-item">
+            <div class="label">// FOCUS</div>
+            <div class="value">AI / ML / CV</div>
+          </div>
+          <div class="info-item">
+            <div class="label">// HANDLE</div>
+            <div class="value" style="color:var(--accent2)">ZyrogX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resize-handle" data-win="about"></div>
+  </div>
+
+  <!-- SKILLS WINDOW -->
+  <div id="win-skills" class="window hidden" style="width:500px;top:80px;left:180px;">
+    <div class="window-titlebar" data-win="skills">
+      <div class="window-controls">
+        <button class="wc-btn wc-close" onclick="closeWindow('skills')"></button>
+        <button class="wc-btn wc-min" onclick="minimizeWindow('skills')"></button>
+        <button class="wc-btn wc-max" onclick="maximizeWindow('skills')"></button>
+      </div>
+      <div class="window-title"><i class="fas fa-code window-title-icon"></i>Skills</div>
+      <div style="width:37px"></div>
+    </div>
+    <div class="window-body">
+      <div class="win-content">
+        <div class="win-section-title">Technical Skills</div>
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="fas fa-terminal"></i> LANGUAGES</div>
+          <div class="skill-tags">
+            <span class="skill-tag tag-blue">Python</span>
+            <span class="skill-tag tag-blue">C#</span>
+            <span class="skill-tag tag-blue">Dart</span>
+            <span class="skill-tag tag-blue">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="fas fa-brain"></i> AI / ML</div>
+          <div class="skill-tags">
+            <span class="skill-tag tag-purple">Machine Learning</span>
+            <span class="skill-tag tag-purple">Deep Learning</span>
+            <span class="skill-tag tag-purple">Computer Vision</span>
+            <span class="skill-tag tag-purple">NLP</span>
+            <span class="skill-tag tag-purple">LLMs</span>
+            <span class="skill-tag tag-purple">RAG</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="fas fa-cubes"></i> FRAMEWORKS</div>
+          <div class="skill-tags">
+            <span class="skill-tag tag-green">TensorFlow</span>
+            <span class="skill-tag tag-green">PyTorch</span>
+            <span class="skill-tag tag-green">LangChain</span>
+            <span class="skill-tag tag-green">Scikit-learn</span>
+            <span class="skill-tag tag-green">Flutter</span>
+            <span class="skill-tag tag-green">Streamlit</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="fas fa-tools"></i> TOOLS</div>
+          <div class="skill-tags">
+            <span class="skill-tag tag-yellow">Firebase</span>
+            <span class="skill-tag tag-yellow">REST APIs</span>
+            <span class="skill-tag tag-yellow">SQL</span>
+            <span class="skill-tag tag-yellow">Git</span>
+            <span class="skill-tag tag-yellow">Docker</span>
+            <span class="skill-tag tag-yellow">AWS</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="fas fa-paint-brush"></i> UI / UX</div>
+          <div class="skill-tags">
+            <span class="skill-tag tag-pink">Flutter UI</span>
+            <span class="skill-tag tag-pink">Jetpack Compose</span>
+            <span class="skill-tag tag-pink">Figma</span>
+            <span class="skill-tag tag-pink">Adobe XD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resize-handle" data-win="skills"></div>
+  </div>
+
+  <!-- PROJECTS WINDOW -->
+  <div id="win-projects" class="window hidden" style="width:560px;top:50px;left:200px;">
+    <div class="window-titlebar" data-win="projects">
+      <div class="window-controls">
+        <button class="wc-btn wc-close" onclick="closeWindow('projects')"></button>
+        <button class="wc-btn wc-min" onclick="minimizeWindow('projects')"></button>
+        <button class="wc-btn wc-max" onclick="maximizeWindow('projects')"></button>
+      </div>
+      <div class="window-title"><i class="fas fa-folder-open window-title-icon"></i>Projects</div>
+      <div style="width:37px"></div>
+    </div>
+    <div class="window-body" style="max-height:500px">
+      <div class="win-content">
+        <div class="win-section-title">My Projects</div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#58a6ff,#bc8cff)"><i class="fas fa-phone-alt" style="color:#fff"></i></div>
+            <div class="project-title">AI-Driven Call Audit</div>
+          </div>
+          <div class="project-desc">Final Year Project — A Flutter app that audits calls using AI to analyze content, tone, and clarity.</div>
+          <div class="project-tags">
+            <span class="project-tag">Flutter</span><span class="project-tag">AI</span><span class="project-tag">NLP</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#6e40c9,#bc8cff)"><i class="fab fa-youtube" style="color:#fff"></i></div>
+            <div class="project-title">YouTube RAG Chatbot</div>
+          </div>
+          <div class="project-desc">LLM-powered chatbot using LangChain. Users upload a YouTube link and chat with context-aware answers about video content.</div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span><span class="project-tag">LangChain</span><span class="project-tag">LLM</span><span class="project-tag">Streamlit</span>
+          </div>
+          <a href="https://github.com/zyrogX/Youtube_chatbot" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#6e40c9,#ff80b4)"><i class="fas fa-envelope-open-text" style="color:#fff"></i></div>
+            <div class="project-title">Email Classification System</div>
+          </div>
+          <div class="project-desc">Multi-class classification of emails into Ham, Spam, and Phishing using XGBoost, SMOTE, and TF-IDF vectorization.</div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span><span class="project-tag">XGBoost</span><span class="project-tag">SMOTE</span><span class="project-tag">NLP</span>
+          </div>
+          <a href="https://github.com/zyrogX/email-spam-ham-phishing-detector" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#ff5f57,#ff9500)"><i class="fas fa-fire" style="color:#fff"></i></div>
+            <div class="project-title">Smoke Detection System</div>
+          </div>
+          <div class="project-desc">Real-time smoke detection using a trained deep learning model (.h5) with computer vision techniques.</div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span><span class="project-tag">TensorFlow</span><span class="project-tag">CV</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#3fb950,#58a6ff)"><i class="fas fa-home" style="color:#fff"></i></div>
+            <div class="project-title">House Price Prediction</div>
+          </div>
+          <div class="project-desc">Regression-based ML model for predicting property prices with 92% accuracy using Scikit-learn.</div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span><span class="project-tag">ML</span><span class="project-tag">Scikit-learn</span>
+          </div>
+          <a href="https://github.com/zyrogX/House-Price-Prediction" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#ffc400,#ff7c00)"><i class="fas fa-comments" style="color:#fff"></i></div>
+            <div class="project-title">WhatsApp-like Chat App</div>
+          </div>
+          <div class="project-desc">Built using TCP/IP and Windows Forms in C# with end-to-end encryption and group chat functionality.</div>
+          <div class="project-tags">
+            <span class="project-tag">C#</span><span class="project-tag">TCP/IP</span><span class="project-tag">WinForms</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#58a6ff,#3fb950)"><i class="fas fa-robot" style="color:#fff"></i></div>
+            <div class="project-title">AI Image Classifier</div>
+          </div>
+          <div class="project-desc">Custom image classifier built with PyTorch that can recognize 100+ categories with 85% accuracy.</div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span><span class="project-tag">PyTorch</span><span class="project-tag">CV</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#ff80b4,#bc8cff)"><i class="fas fa-mobile-alt" style="color:#fff"></i></div>
+            <div class="project-title">Flutter Expense Tracker</div>
+          </div>
+          <div class="project-desc">Cross-platform expense tracking app with Firebase backend and beautiful UI using Flutter.</div>
+          <div class="project-tags">
+            <span class="project-tag">Flutter</span><span class="project-tag">Firebase</span><span class="project-tag">Dart</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="resize-handle" data-win="projects"></div>
+  </div>
+
+  <!-- CONTACT WINDOW -->
+  <div id="win-contact" class="window hidden" style="width:440px;top:90px;left:260px;">
+    <div class="window-titlebar" data-win="contact">
+      <div class="window-controls">
+        <button class="wc-btn wc-close" onclick="closeWindow('contact')"></button>
+        <button class="wc-btn wc-min" onclick="minimizeWindow('contact')"></button>
+        <button class="wc-btn wc-max" onclick="maximizeWindow('contact')"></button>
+      </div>
+      <div class="window-title"><i class="fas fa-envelope window-title-icon"></i>Contact</div>
+      <div style="width:37px"></div>
+    </div>
+    <div class="window-body">
+      <div class="win-content">
+        <div class="win-section-title">Get In Touch</div>
+        <div class="contact-item">
+          <div class="contact-icon" style="background:rgba(88,166,255,0.15)"><i class="fas fa-envelope" style="color:#58a6ff"></i></div>
+          <div><div class="contact-label">// EMAIL</div><div class="contact-value"><a href="mailto:zyrogx@gmail.com">zyrogx@gmail.com</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" style="background:rgba(188,140,255,0.15)"><i class="fab fa-github" style="color:#bc8cff"></i></div>
+          <div><div class="contact-label">// GITHUB</div><div class="contact-value"><a href="https://github.com/zyrogX" target="_blank">github.com/zyrogX</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" style="background:rgba(88,166,255,0.15)"><i class="fab fa-linkedin-in" style="color:#58a6ff"></i></div>
+          <div><div class="contact-label">// LINKEDIN</div><div class="contact-value"><a href="https://linkedin.com/in/zyrog" target="_blank">linkedin.com/in/zyrog</a></div></div>
+        </div>
+        <div class="contact-form">
+          <div class="form-row">
+            <label class="form-label">// NAME</label>
+            <input class="form-input" id="cnt-name" type="text" placeholder="Your name" autocomplete="off">
+          </div>
+          <div class="form-row">
+            <label class="form-label">// EMAIL</label>
+            <input class="form-input" id="cnt-email" type="email" placeholder="your@email.com" autocomplete="off">
+          </div>
+          <div class="form-row">
+            <label class="form-label">// MESSAGE</label>
+            <textarea class="form-input" id="cnt-msg" placeholder="Hello Muhammad..."></textarea>
+          </div>
+          <button class="submit-btn" onclick="handleContactSubmit()">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="resize-handle" data-win="contact"></div>
+  </div>
+
+  <!-- TERMINAL WINDOW -->
+  <div id="win-terminal" class="window hidden" style="width:520px;top:100px;left:150px;">
+    <div class="window-titlebar" data-win="terminal">
+      <div class="window-controls">
+        <button class="wc-btn wc-close" onclick="closeWindow('terminal')"></button>
+        <button class="wc-btn wc-min" onclick="minimizeWindow('terminal')"></button>
+        <button class="wc-btn wc-max" onclick="maximizeWindow('terminal')"></button>
+      </div>
+      <div class="window-title"><i class="fas fa-terminal window-title-icon"></i>terminal — bash</div>
+      <div style="width:37px"></div>
+    </div>
+    <div class="window-body">
+      <div class="terminal-body" id="terminal-output">
+        <div class="terminal-line"><span class="terminal-prompt">zyrogx@portfolio:~$</span><span class="terminal-cmd"> cat about.txt</span></div>
+        <div class="terminal-out">Name: Muhammad Iftikhar (ZyrogX)</div>
+        <div class="terminal-out">Role: AI Engineer | CS Student</div>
+        <div class="terminal-out">Status: <span style="color:#3fb950">● Available for opportunities</span></div>
+        <br>
+        <div class="terminal-line"><span class="terminal-prompt">zyrogx@portfolio:~$</span><span class="terminal-cmd"> ls projects/</span></div>
+        <div class="terminal-out">ai-call-audit/  &nbsp; youtube-rag-chatbot/  &nbsp; email-classifier/</div>
+        <div class="terminal-out">smoke-detector/  house-price-predictor/  flutter-expense-tracker/</div>
+        <div class="terminal-out">whatsapp-clone/  ai-image-classifier/</div>
+        <br>
+        <div class="terminal-line"><span class="terminal-prompt">zyrogx@portfolio:~$</span><span class="terminal-cmd"> skills --list</span></div>
+        <div class="terminal-out">Python, C#, Dart, JavaScript</div>
+        <div class="terminal-out">TensorFlow, PyTorch, LangChain, Flutter</div>
+        <div class="terminal-out">Machine Learning, Deep Learning, NLP, CV</div>
+        <br>
+        <div class="terminal-line">
+          <span class="terminal-prompt">zyrogx@portfolio:~$</span>
+          <span class="terminal-cmd"> </span><span class="terminal-cursor"></span>
+        </div>
+      </div>
+      <div style="padding:8px 16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;background:var(--window-header)">
+        <span style="color:var(--accent2);font-size:12px;flex-shrink:0">zyrogx@portfolio:~$</span>
+        <input id="terminal-input" type="text" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px" placeholder="type a command..." onkeydown="handleTerminal(event)">
+      </div>
+    </div>
+    <div class="resize-handle" data-win="terminal"></div>
+  </div>
+
+</div>
+
+<!-- Taskbar -->
+<div id="taskbar">
+  <div id="taskbar-left">
+    <button class="start-btn" onclick="cascadeWindows()">
+      <i class="fas fa-th"></i> ZyrogX OS
+    </button>
+  </div>
+  <div id="taskbar-center" id="taskbar-apps"></div>
+  <div id="taskbar-right">
+    <span style="font-size:11px;color:var(--text-muted)"><i class="fab fa-github" style="color:var(--accent2)"></i> zyrogX</span>
+    <span id="clock">00:00</span>
+  </div>
+</div>
+
+<script>
+  // ── BOOT ──
+  setTimeout(() => {
+    const boot = document.getElementById('boot');
+    boot.style.opacity = '0';
+    setTimeout(() => {
+      boot.style.display = 'none';
+      openWindow('about');
+      setTimeout(() => openWindow('projects'), 300);
+      setTimeout(() => {
+        const n = document.getElementById('notif');
+        n.classList.add('show');
+        setTimeout(() => n.classList.remove('show'), 4000);
+      }, 800);
+    }, 600);
+  }, 2200);
+
+  // ── CLOCK ──
+  function updateClock() {
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2,'0');
+    const m = now.getMinutes().toString().padStart(2,'0');
+    document.getElementById('clock').textContent = h + ':' + m;
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  // ── WINDOW MANAGEMENT ──
+  let zCounter = 10;
+  const minimizedState = {};
+  const normalState = {};
+
+  function openWindow(name) {
+    const win = document.getElementById('win-' + name);
+    if (!win) return;
+    if (win.classList.contains('hidden')) {
+      win.classList.remove('hidden');
+    }
+    delete minimizedState[name];
+    win.style.display = 'flex';
+    focusWindow(name);
+    updateTaskbar();
+  }
+
+  function closeWindow(name) {
+    const win = document.getElementById('win-' + name);
+    if (!win) return;
+    win.style.display = 'none';
+    win.classList.add('hidden');
+    delete minimizedState[name];
+    updateTaskbar();
+  }
+
+  function minimizeWindow(name) {
+    const win = document.getElementById('win-' + name);
+    if (!win) return;
+    minimizedState[name] = true;
+    win.style.display = 'none';
+    updateTaskbar();
+  }
+
+  function focusWindow(name) {
+    document.querySelectorAll('.window').forEach(w => w.classList.remove('focused'));
+    const win = document.getElementById('win-' + name);
+    if (win) {
+      win.classList.add('focused');
+      win.style.zIndex = ++zCounter;
+    }
+  }
+
+  let isMaximized = {};
+  function maximizeWindow(name) {
+    const win = document.getElementById('win-' + name);
+    if (!win) return;
+    if (isMaximized[name]) {
+      const s = normalState[name];
+      win.style.width = s.w; win.style.height = s.h;
+      win.style.left = s.l; win.style.top = s.t;
+      delete isMaximized[name];
+    } else {
+      normalState[name] = { w: win.style.width, h: win.style.height, l: win.style.left, t: win.style.top };
+      win.style.width = '100%'; win.style.height = 'calc(100vh - 48px)';
+      win.style.left = '0'; win.style.top = '0';
+      isMaximized[name] = true;
+    }
+  }
+
+  function updateTaskbar() {
+    const center = document.getElementById('taskbar-center');
+    center.innerHTML = '';
+    const windows = ['about','skills','projects','contact','terminal'];
+    const icons = { about:'fa-user', skills:'fa-code', projects:'fa-folder-open', contact:'fa-envelope', terminal:'fa-terminal' };
+    const labels = { about:'About', skills:'Skills', projects:'Projects', contact:'Contact', terminal:'Terminal' };
+    windows.forEach(name => {
+      const win = document.getElementById('win-' + name);
+      if (!win || (win.classList.contains('hidden') && !minimizedState[name])) return;
+      const btn = document.createElement('button');
+      btn.className = 'taskbar-app' + (win.style.display !== 'none' ? ' active' : '');
+      btn.innerHTML = `<i class="fas ${icons[name]}"></i>${labels[name]}`;
+      btn.onclick = () => {
+        if (minimizedState[name]) {
+          openWindow(name);
+        } else if (win.classList.contains('focused') && win.style.display !== 'none') {
+          minimizeWindow(name);
+        } else {
+          openWindow(name);
+        }
+      };
+      center.appendChild(btn);
+    });
+  }
+
+  function cascadeWindows() {
+    const wins = ['about','skills','projects','contact','terminal'];
+    let offset = 40;
+    wins.forEach(name => {
+      const win = document.getElementById('win-' + name);
+      if (!win || win.style.display === 'none') return;
+      win.style.left = offset + 'px';
+      win.style.top = offset + 'px';
+      if (isMaximized[name]) { delete isMaximized[name]; win.style.width = '480px'; win.style.height = ''; }
+      offset += 30;
+    });
+  }
+
+  // Focus on click
+  document.querySelectorAll('.window').forEach(win => {
+    win.addEventListener('mousedown', () => {
+      const name = win.id.replace('win-', '');
+      focusWindow(name);
+    });
+  });
+
+  // ── DRAG ──
+  document.querySelectorAll('.window-titlebar').forEach(bar => {
+    let dragging = false, startX, startY, winStartL, winStartT;
+    const winName = bar.dataset.win;
+    const win = document.getElementById('win-' + winName);
+
+    bar.addEventListener('mousedown', e => {
+      if (e.target.classList.contains('wc-btn')) return;
+      if (isMaximized[winName]) return;
+      dragging = true;
+      startX = e.clientX; startY = e.clientY;
+      const rect = win.getBoundingClientRect();
+      winStartL = rect.left; winStartT = rect.top;
+      focusWindow(winName);
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
+      win.style.left = (winStartL + dx) + 'px';
+      win.style.top = Math.max(0, winStartT + dy) + 'px';
+    });
+
+    document.addEventListener('mouseup', () => { dragging = false; });
+  });
+
+  // ── RESIZE ──
+  document.querySelectorAll('.resize-handle').forEach(handle => {
+    let resizing = false, startX, startY, startW, startH;
+    const winName = handle.dataset.win;
+    const win = document.getElementById('win-' + winName);
+
+    handle.addEventListener('mousedown', e => {
+      resizing = true;
+      startX = e.clientX; startY = e.clientY;
+      startW = win.offsetWidth; startH = win.offsetHeight;
+      e.stopPropagation(); e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!resizing) return;
+      win.style.width = Math.max(320, startW + e.clientX - startX) + 'px';
+      win.style.height = Math.max(200, startH + e.clientY - startY) + 'px';
+    });
+
+    document.addEventListener('mouseup', () => { resizing = false; });
+  });
+
+  // ── CONTEXT MENU ──
+  const ctxMenu = document.getElementById('context-menu');
+
+  function showContextMenu(e) {
+    e.preventDefault();
+    ctxMenu.style.display = 'block';
+    const x = Math.min(e.clientX, window.innerWidth - 170);
+    const y = Math.min(e.clientY, window.innerHeight - 200);
+    ctxMenu.style.left = x + 'px';
+    ctxMenu.style.top = y + 'px';
+  }
+
+  document.addEventListener('click', () => { ctxMenu.style.display = 'none'; });
+  document.addEventListener('contextmenu', e => {
+    if (e.target.closest('.window')) { ctxMenu.style.display = 'none'; }
+  });
+
+  // ── DESKTOP ICON SELECT ──
+  function selectIcon(el) {
+    document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+  document.getElementById('desktop').addEventListener('click', e => {
+    if (!e.target.closest('.desktop-icon')) {
+      document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
+    }
+  });
+
+  // ── TERMINAL ──
+  const terminalCmds = {
+    'help': () => `Available commands:\n  about     — show about info\n  skills    — list skills\n  projects  — list projects\n  contact   — show contact info\n  clear     — clear terminal\n  open [app]— open a window`,
+    'about': () => `Muhammad Iftikhar (ZyrogX)\nAI Engineer | CS Student | Graduating 2026\nStatus: Available for opportunities`,
+    'skills': () => `Languages:  Python, C#, Dart, JavaScript\nAI/ML:      TensorFlow, PyTorch, LangChain, Scikit-learn\nTools:      Firebase, REST APIs, SQL, Git, Docker, AWS`,
+    'projects': () => `1. AI-Driven Call Audit (FYP)\n2. YouTube RAG Chatbot\n3. Email Classification System\n4. Smoke Detection System\n5. House Price Prediction\n6. WhatsApp-like Chat App\n7. AI Image Classifier\n8. Flutter Expense Tracker`,
+    'contact': () => `Email:    zyrogx@gmail.com\nGitHub:   github.com/zyrogX\nLinkedIn: linkedin.com/in/zyrog`,
+    'clear': () => null,
+    'whoami': () => 'zyrogx',
+    'pwd': () => '/home/zyrogx/portfolio',
+    'date': () => new Date().toString(),
+    'uname': () => 'ZyrogOS 1.0.0 AI-Edition',
+  };
+
+  function handleTerminal(e) {
+    if (e.key !== 'Enter') return;
+    const input = document.getElementById('terminal-input');
+    const cmd = input.value.trim().toLowerCase();
+    const out = document.getElementById('terminal-output');
+    input.value = '';
+
+    // Add command line
+    const cmdLine = document.createElement('div');
+    cmdLine.className = 'terminal-line';
+    cmdLine.innerHTML = `<span class="terminal-prompt">zyrogx@portfolio:~$</span><span class="terminal-cmd"> ${cmd}</span>`;
+    // Remove cursor line first
+    out.querySelectorAll('.terminal-line:last-child').forEach(l => {
+      if (l.querySelector('.terminal-cursor')) l.remove();
+    });
+    out.appendChild(cmdLine);
+
+    if (cmd === 'clear') {
+      out.innerHTML = '';
+    } else if (cmd.startsWith('open ')) {
+      const app = cmd.replace('open ','').trim();
+      const valid = ['about','skills','projects','contact','terminal'];
+      if (valid.includes(app)) {
+        openWindow(app);
+        addTerminalOut(out, `Opening ${app}...`);
+      } else {
+        addTerminalOut(out, `No app named '${app}'. Try: about, skills, projects, contact, terminal`);
+      }
+    } else if (terminalCmds[cmd]) {
+      const result = terminalCmds[cmd]();
+      if (result) {
+        result.split('\n').forEach(line => addTerminalOut(out, line));
+      }
+    } else if (cmd) {
+      addTerminalOut(out, `bash: ${cmd}: command not found. Type 'help' for commands.`);
+    }
+
+    // Add new cursor line
+    const cursorLine = document.createElement('div');
+    cursorLine.className = 'terminal-line';
+    cursorLine.innerHTML = `<span class="terminal-prompt">zyrogx@portfolio:~$</span><span class="terminal-cmd"> </span><span class="terminal-cursor"></span>`;
+    out.appendChild(cursorLine);
+    out.scrollTop = out.scrollHeight;
+  }
+
+  function addTerminalOut(container, text) {
+    const el = document.createElement('div');
+    el.className = 'terminal-out';
+    el.textContent = text || ' ';
+    container.appendChild(el);
+  }
+
+  // ── CONTACT FORM ──
+  function handleContactSubmit() {
+    const name = document.getElementById('cnt-name').value;
+    const email = document.getElementById('cnt-email').value;
+    const msg = document.getElementById('cnt-msg').value;
+    if (!name || !email || !msg) {
+      showNotif('warning', 'Missing Fields', 'Please fill in all fields before sending.');
+      return;
+    }
+    document.getElementById('cnt-name').value = '';
+    document.getElementById('cnt-email').value = '';
+    document.getElementById('cnt-msg').value = '';
+    showNotif('check-circle', 'Message Sent!', `Thanks ${name}, I'll get back to you soon.`);
+  }
+
+  function showNotif(icon, title, body) {
+    const n = document.getElementById('notif');
+    n.querySelector('.notif-icon i').className = 'fas fa-' + icon;
+    n.querySelector('.notif-title').textContent = title;
+    n.querySelector('.notif-body').textContent = body;
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 4000);
+  }
+</script>
 </body>
 </html>
